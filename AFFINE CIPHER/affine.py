@@ -6,9 +6,17 @@ def mod(a):
 def encrypt(p,a,b):
     c=""
     for ch in p:
-        x=ord(ch)-97
-        y=(a*x+b)%26
-        c=c+chr(y+97)
+        if ch!=' ':
+            x=ord(ch)-97
+            if x<0:
+                x=x+32
+                y=(a*x+b)%26
+                c=c+chr(y+65)
+            else:
+                y=(a*x+b)%26
+                c=c+chr(y+97)
+        else:
+            c=c+ch
     return c
 
 def decrypt(c,a,b):
@@ -20,14 +28,21 @@ def decrypt(c,a,b):
     print(a_1)
         
     for ch in c:
-        x=ord(ch)-97
-        print((a_1*(mod(x-b)))%26)
-        print("x=",x)
-        if x>=20:
-            d=d+chr(97+(a_1*(mod(x-b)))%26)
-            # print(d)
+        if ch!=' ':
+            x=ord(ch)-97
+            if x<0:
+                x=x+32
+                if x>=20:
+                    d=d+chr(65+(a_1*(mod(x-b)))%26)
+                else:
+                    d=d+chr(26+65-(a_1*(mod(x-b)))%26)
+            else:
+                if x>=20:
+                    d=d+chr(97+(a_1*(mod(x-b)))%26)
+                else:
+                    d=d+chr(26+97-(a_1*(mod(x-b)))%26)
         else:
-            d=d+chr(26+97-(a_1*(mod(x-b)))%26)
+            d=d+ch
     return d
 while True:
     option=int(raw_input("Press 1 to Encrypt \nPress 2 to Decrypt \nPress 3 to EXIT\n"))
@@ -48,6 +63,3 @@ while True:
     else:
         print("Choose a valid option")
         continue
-
-
-   
