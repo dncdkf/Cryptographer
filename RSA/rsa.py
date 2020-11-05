@@ -25,4 +25,3 @@ c=pow(inp,e)%n
 print(c)
 res=pow(c,d)%n
 print(res)
-
