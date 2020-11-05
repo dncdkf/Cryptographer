@@ -1,3 +1,4 @@
+ 
 x=raw_input("enter the plaintext")
 key=int(raw_input("enter the key"))
 mat=[['0' for i in range(len(x))]for j in range(key)]
